@@ -20,12 +20,18 @@ function App() {
     }  
   }
 
-  function deleteNote(id) {
-    setNotes(prevNotes => {
-      return prevNotes.filter((noteItem, index) => {
-        return index !== id;
+  const deleteNote= async function(id) {
+    try{
+      await dkeeper_backend.deleteNote(id);
+      setNotes(prevNotes => {
+        return prevNotes.filter((noteItem, index) => {
+          return index !== id;
+        });
       });
-    });
+    }
+    catch(error){
+      console.log(error);
+    }  
   }
 
   const getNotes = async () => {
